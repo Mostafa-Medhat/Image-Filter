@@ -178,7 +178,6 @@ class Ui_MainWindow(object):
         self.menuOpen.setTitle(_translate("MainWindow", "File"))
         self.actionImage.setText(_translate("MainWindow", "Open"))
 from pyqtgraph import PlotWidget
-import resource_rc
 
 
 if __name__ == "__main__":

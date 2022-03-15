@@ -1,13 +1,23 @@
-from img_filter import Ui_MainWindow
+from img_filter_gui import Ui_MainWindow
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtGui import QIcon, QPixmap
 
 
 class GUI (Ui_MainWindow):
     def setup(self,MainWindow):
         super().setupUi(MainWindow)
         ##wriet gui modificaion here##
+        # pixmap = QPixmap('testimage.jpeg')
+        # self.label_Orig_Spat.setPixmap(pixmap)
+
+        # self.label_Orig_Friq.setPixmap(pixmap)
+        
+                
+
+
 
 
 
@@ -17,7 +27,11 @@ class application(QtWidgets.QMainWindow):
         self.gui=GUI()
         self.gui.setup(self)
 
+
     ##Write code here##
+
+    
+        
 
 
 

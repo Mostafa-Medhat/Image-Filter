@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_image_filtering">
        <attribute name="title">
@@ -29,8 +29,20 @@
          <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
           <item>
            <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,1,1" columnstretch="0,1,1">
+            <property name="spacing">
+             <number>9</number>
+            </property>
             <item row="2" column="1">
              <widget class="QLabel" name="label_Fil_Spat">
+              <property name="frameShape">
+               <enum>QFrame::WinPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="lineWidth">
+               <number>37</number>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -38,6 +50,15 @@
             </item>
             <item row="2" column="2">
              <widget class="QLabel" name="label_Fil_Freq">
+              <property name="frameShape">
+               <enum>QFrame::WinPanel</enum>
+              </property>
+              <property name="lineWidth">
+               <number>37</number>
+              </property>
+              <property name="midLineWidth">
+               <number>0</number>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -45,6 +66,12 @@
             </item>
             <item row="1" column="2">
              <widget class="QLabel" name="label_Orig_Friq">
+              <property name="frameShape">
+               <enum>QFrame::WinPanel</enum>
+              </property>
+              <property name="lineWidth">
+               <number>34</number>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -117,6 +144,12 @@
             </item>
             <item row="1" column="1">
              <widget class="QLabel" name="label_Orig_Spat">
+              <property name="frameShape">
+               <enum>QFrame::WinPanel</enum>
+              </property>
+              <property name="lineWidth">
+               <number>37</number>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -178,15 +211,21 @@
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_4" rowstretch="0,1,1">
+          <property name="spacing">
+           <number>9</number>
+          </property>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_hist_filt">
+           <widget class="QLabel" name="label_Hist_Filt">
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_hist_title_filt">
+           <widget class="QLabel" name="label_Hist_Title_Filt">
             <property name="font">
              <font>
               <pointsize>17</pointsize>
@@ -201,8 +240,11 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="PlotWidget" name="graphicsView_Orig"/>
+          </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_hist_title_orig">
+           <widget class="QLabel" name="label_Hist_Title_Orig">
             <property name="font">
              <font>
               <pointsize>17</pointsize>
@@ -217,18 +259,21 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="PlotWidget" name="graphicsView_Filt"/>
+          </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_hist_orig">
+           <widget class="QLabel" name="label_Hist_Orig">
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
+            <property name="lineWidth">
+             <number>37</number>
+            </property>
             <property name="text">
              <string/>
             </property>
            </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="PlotWidget" name="graphicsView_orig"/>
-          </item>
-          <item row="2" column="1">
-           <widget class="PlotWidget" name="graphicsView_filt"/>
           </item>
          </layout>
         </item>
@@ -269,8 +314,6 @@
    <header location="global">pyqtgraph</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="D:/Mohamed/سنة تالتة/االترم الثانى/Computer Vision in Medical Fields/Projects/Task 1/resource/resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

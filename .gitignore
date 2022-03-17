@@ -2,3 +2,5 @@ __pycache__
 .DS_Store
 __pycache__/img_filter.cpython-310.pyc
 .gitignore
+test.py
+img_filter_gui.pyc

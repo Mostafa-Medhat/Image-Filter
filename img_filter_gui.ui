@@ -32,51 +32,6 @@
             <property name="spacing">
              <number>9</number>
             </property>
-            <item row="2" column="1">
-             <widget class="QLabel" name="label_Fil_Spat">
-              <property name="frameShape">
-               <enum>QFrame::WinPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="lineWidth">
-               <number>37</number>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="label_Fil_Freq">
-              <property name="frameShape">
-               <enum>QFrame::WinPanel</enum>
-              </property>
-              <property name="lineWidth">
-               <number>37</number>
-              </property>
-              <property name="midLineWidth">
-               <number>0</number>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLabel" name="label_Orig_Friq">
-              <property name="frameShape">
-               <enum>QFrame::WinPanel</enum>
-              </property>
-              <property name="lineWidth">
-               <number>34</number>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QLabel" name="label_Title_Spat">
               <property name="font">
@@ -143,20 +98,16 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLabel" name="label_Orig_Spat">
-              <property name="frameShape">
-               <enum>QFrame::WinPanel</enum>
-              </property>
-              <property name="lineWidth">
-               <number>37</number>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="scaledContents">
-               <bool>false</bool>
-              </property>
-             </widget>
+             <widget class="QWidget" name="widget_Orig_Spat" native="true"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QWidget" name="widget_Orig_Freq" native="true"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="QWidget" name="widget_Filt_Spat" native="true"/>
+            </item>
+            <item row="2" column="2">
+             <widget class="QWidget" name="widget_Filt_Freq" native="true"/>
             </item>
            </layout>
           </item>
@@ -214,16 +165,6 @@
           <property name="spacing">
            <number>9</number>
           </property>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_Hist_Filt">
-            <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QLabel" name="label_Hist_Title_Filt">
             <property name="font">
@@ -263,17 +204,10 @@
            <widget class="PlotWidget" name="graphicsView_Filt"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_Hist_Orig">
-            <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
-            </property>
-            <property name="lineWidth">
-             <number>37</number>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+           <widget class="QWidget" name="widget_Orig_Hist" native="true"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QWidget" name="widget_Filt_Hist" native="true"/>
           </item>
          </layout>
         </item>

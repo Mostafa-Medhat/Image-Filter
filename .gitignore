@@ -4,3 +4,5 @@ __pycache__/img_filter.cpython-310.pyc
 .gitignore
 test.py
 img_filter_gui.pyc
+.vs
+.idea

@@ -110,18 +110,33 @@ class GUI (Ui_MainWindow):
         self.axes_Orig_image.imshow(self.img, cmap = 'gray') ##original image in the histogram tab
 
         ##write histogram equalization code here##
-        img_gray=rgb2gray(self.img)
-        hist_gray, bins_gray = np.histogram(255 * img_gray)
-        self.axes_Orig_Hist.clear()
-        self.axes_Orig_Hist.hist(255*img_gray,bins=bins_gray)
+        # img_gray=rgb2gray(self.img)
+        hist_gray, bins_gray = np.histogram(self.img.flatten(), 256, [0, 255])
+        cdf = hist_gray.cumsum()
+        cdf_normalized = cdf * float(hist_gray.max()) / cdf.max()
 
-        hist, bins = np.histogram(self.img, 256, [0, 255])
-        cdf = hist.cumsum()
+        self.axes_Orig_Hist.clear()
+        self.axes_Orig_Hist.hist(self.img.flatten(),bins=bins_gray)
+        self.axes_Orig_Hist.plot(cdf_normalized,color='r')
+        self.axes_Orig_Hist.legend(('cdf', 'histogram'), loc='upper right')
+        self.axes_Orig_Hist.set_xlabel("Gray Level")
+        self.axes_Orig_Hist.set_ylabel("Number of pixels")
+
+
         equalize = (cdf - cdf.min()) * 255 / ((self.img.shape[0] * self.img.shape[1]) - cdf.min())
         equalizedImage=equalize[self.img]
+
+        hist_gray_equalized, bins_gray = np.histogram(equalizedImage.flatten(), 256, [0, 255])
+        cdf_equalized = hist_gray_equalized.cumsum()
+        cdf_normalized_equalized = cdf_equalized * float(hist_gray_equalized.max()) / cdf_equalized.max()
+
         self.axes_Filt_image.imshow(equalizedImage,cmap='gray')
-        self.axes_Orig_Hist.clear()
-        self.axes_Filt_Hist.hist(equalizedImage)
+        self.axes_Filt_Hist.clear()
+        self.axes_Filt_Hist.hist(equalizedImage.flatten(),bins=bins_gray)
+        self.axes_Filt_Hist.plot(cdf_normalized_equalized,color='r')
+        self.axes_Filt_Hist.legend(('cdf', 'histogram'), loc='upper right')
+        self.axes_Filt_Hist.set_xlabel("Gray Level")
+        self.axes_Filt_Hist.set_ylabel("Number of pixels")
 
         ##############
 

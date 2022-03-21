@@ -120,7 +120,7 @@ class GUI (Ui_MainWindow):
         equalize = (cdf - cdf.min()) * 255 / ((self.img.shape[0] * self.img.shape[1]) - cdf.min())
         equalizedImage=equalize[self.img]
         self.axes_Filt_image.imshow(equalizedImage,cmap='gray')
-
+        self.axes_Orig_Hist.clear()
         self.axes_Filt_Hist.hist(equalizedImage)
 
         ##############

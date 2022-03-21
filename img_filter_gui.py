@@ -117,9 +117,9 @@ class Ui_MainWindow(object):
         self.label_Hist_Title_Filt.setAlignment(QtCore.Qt.AlignCenter)
         self.label_Hist_Title_Filt.setObjectName("label_Hist_Title_Filt")
         self.gridLayout_4.addWidget(self.label_Hist_Title_Filt, 0, 1, 1, 1)
-        self.graphicsView_Orig = PlotWidget(self.tab_histogram)
-        self.graphicsView_Orig.setObjectName("graphicsView_Orig")
-        self.gridLayout_4.addWidget(self.graphicsView_Orig, 2, 0, 1, 1)
+
+
+
         self.label_Hist_Title_Orig = QtWidgets.QLabel(self.tab_histogram)
         font = QtGui.QFont()
         font.setPointSize(17)
@@ -128,17 +128,32 @@ class Ui_MainWindow(object):
         self.label_Hist_Title_Orig.setAlignment(QtCore.Qt.AlignCenter)
         self.label_Hist_Title_Orig.setObjectName("label_Hist_Title_Orig")
         self.gridLayout_4.addWidget(self.label_Hist_Title_Orig, 0, 0, 1, 1)
-        self.graphicsView_Filt = PlotWidget(self.tab_histogram)
-        self.graphicsView_Filt.setObjectName("graphicsView_Filt")
-        self.gridLayout_4.addWidget(self.graphicsView_Filt, 2, 1, 1, 1)
+
+        # self.graphicsView_Filt = PlotWidget(self.tab_histogram)
+        # self.graphicsView_Filt.setObjectName("graphicsView_Filt")
+        # self.gridLayout_4.addWidget(self.graphicsView_Filt, 2, 1, 1, 1)
+
+        # self.widget_Orig_Hist = QtWidgets.QWidget(self.tab_histogram)
+        # self.widget_Orig_Hist.setObjectName("widget_Orig_Hist")
+        # self.gridLayout_4.addWidget(self.widget_Orig_Hist, 1, 0, 1, 1)
+        
 
         self.widget_Orig_Hist = QtWidgets.QWidget(self.tab_histogram)
         self.widget_Orig_Hist.setObjectName("widget_Orig_Hist")
-        # self.gridLayout_4.addWidget(self.widget_Orig_Hist, 1, 0, 1, 1)
-        
+        self.gridLayout_4.addWidget(self.widget_Orig_Hist, 2, 0, 1, 1)
+
         self.widget_Filt_Hist = QtWidgets.QWidget(self.tab_histogram)
         self.widget_Filt_Hist.setObjectName("widget_Filt_Hist")
-        self.gridLayout_4.addWidget(self.widget_Filt_Hist, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.widget_Filt_Hist, 2, 1, 1, 1)
+
+        self.widget_Orig_image = QtWidgets.QWidget(self.tab_histogram)
+        self.widget_Orig_image.setObjectName("widget_Orig_image")
+        self.gridLayout_4.addWidget(self.widget_Orig_image, 1, 0, 1, 1)
+
+        self.widget_Filt_image = QtWidgets.QWidget(self.tab_histogram)
+        self.widget_Filt_image.setObjectName("widget_Filt_image")
+        self.gridLayout_4.addWidget(self.widget_Filt_image, 1, 1, 1, 1)
+
         self.gridLayout_4.setRowStretch(1, 1)
         self.gridLayout_4.setRowStretch(2, 1)
         self.gridLayout_5.addLayout(self.gridLayout_4, 0, 0, 1, 1)

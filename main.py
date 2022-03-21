@@ -1,3 +1,4 @@
+
 from img_filter_gui import Ui_MainWindow
 import sys
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
@@ -24,6 +25,7 @@ from PyQt5.QtGui import QPixmap
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+from skimage.color import rgb2gray
 
 
 class GUI (Ui_MainWindow):
@@ -32,8 +34,6 @@ class GUI (Ui_MainWindow):
         self.comboBox_filters.addItem("No filter")
         self.comboBox_filters.addItem("blur")
         self.comboBox_filters.addItem("median")
-        self.comboBox_filters.addItem("laplace")
-
 
         self.figure_Orig_Spat = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Spat = self.figure_Orig_Spat.add_subplot()
@@ -58,20 +58,30 @@ class GUI (Ui_MainWindow):
         self.canvas_Filt_Freq = FigureCanvas(self.figure_Filt_Freq)
         self.gridLayout_2.addWidget(self.canvas_Filt_Freq, 2, 2, 1, 1)
 
+        self.figure_Orig_image = Figure(figsize=(3, 3), dpi=100)
+        self.axes_Orig_image = self.figure_Orig_image.add_subplot()
+        self.canvas_Orig_image = FigureCanvas(self.figure_Orig_image)
+        self.gridLayout_4.addWidget(self.canvas_Orig_image, 1, 0, 1, 1)
+
         self.figure_Orig_Hist = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Hist = self.figure_Orig_Hist.add_subplot()
         self.canvas_Orig_Hist = FigureCanvas(self.figure_Orig_Hist)
-        self.gridLayout_4.addWidget(self.canvas_Orig_Hist, 1, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.canvas_Orig_Hist,  2, 0, 1, 1)
 
+        self.figure_Filt_image = Figure(figsize=(3, 3), dpi=100)
+        self.axes_Filt_image = self.figure_Filt_image.add_subplot()
+        self.canvas_Filt_image = FigureCanvas(self.figure_Filt_image)
+        self.gridLayout_4.addWidget(self.canvas_Filt_image, 1, 1, 1, 1)
 
         self.figure_Filt_Hist = Figure(figsize=(3, 3), dpi=100)
         self.axes_Filt_Hist = self.figure_Filt_Hist.add_subplot()
         self.canvas_Filt_Hist = FigureCanvas(self.figure_Filt_Hist)
-        self.gridLayout_4.addWidget(self.canvas_Filt_Hist, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.canvas_Filt_Hist, 2, 1, 1, 1)
 
 
 
-        self.axes=[ self.axes_Orig_Spat,self.axes_Orig_Freq,self.axes_Filt_Spat,self.axes_Filt_Freq,self.axes_Orig_Hist,self.axes_Filt_Hist]
+        self.axes=[ self.axes_Orig_Spat,self.axes_Orig_Freq,self.axes_Filt_Spat,self.axes_Filt_Freq,
+                    self.axes_Orig_image,self.axes_Filt_image]
         for axis in self.axes: ## removing axes from the figure so the image would look nice
             axis.set_xticks([])
             axis.set_yticks([])
@@ -91,29 +101,41 @@ class GUI (Ui_MainWindow):
         filename = QFileDialog.getOpenFileName()##reading file
         imagePath = filename[0] ##reading file
         self.img = cv2.imread(imagePath,0)##reading file
+        self.img= cv2.resize(self.img,(520,265))
         dft = cv2.dft(np.float32(self.img),flags = cv2.DFT_COMPLEX_OUTPUT)##calculate dft for frequency domain
         dft_shift = np.fft.fftshift(dft)
         magnitude_spectrum = 20*np.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1]))
         self.axes_Orig_Freq.imshow(magnitude_spectrum, cmap = 'gray')## frequency domian
         self.axes_Orig_Spat.imshow(self.img, cmap = 'gray') ##original image
-        self.axes_Orig_Hist.imshow(self.img, cmap = 'gray') ##original image in the histogram tab
+        self.axes_Orig_image.imshow(self.img, cmap = 'gray') ##original image in the histogram tab
 
         ##write histogram equalization code here##
+        img_gray=rgb2gray(self.img)
+        hist_gray, bins_gray = np.histogram(255 * img_gray)
+        self.axes_Orig_Hist.clear()
+        self.axes_Orig_Hist.hist(255*img_gray,bins=bins_gray)
 
+        hist, bins = np.histogram(self.img, 256, [0, 255])
+        cdf = hist.cumsum()
+        equalize = (cdf - cdf.min()) * 255 / ((self.img.shape[0] * self.img.shape[1]) - cdf.min())
+        equalizedImage=equalize[self.img]
+        self.axes_Filt_image.imshow(equalizedImage,cmap='gray')
 
-
+        self.axes_Filt_Hist.hist(equalizedImage)
 
         ##############
 
 
         self.canvas_Orig_Freq.draw()##apply changes
         self.canvas_Orig_Spat.draw()##apply changes
+        self.canvas_Orig_image.draw()##apply changes
+        self.canvas_Filt_image.draw()##apply changes
+
         self.canvas_Orig_Hist.draw()##apply changes
         self.canvas_Filt_Hist.draw()##apply changes
         self.filtering()
 
-
-    def filtering(self): #this function is called when the combobox is changed
+    def filtering(self):  # this function is called when the combobox is changed
 
         ## write the code of the right filter depending on the combobox's current index
         if self.comboBox_filters.currentText() == 'laplace':
@@ -121,34 +143,26 @@ class GUI (Ui_MainWindow):
             filteredLaplacian = cv2.Laplacian(laplaceSrc, cv2.CV_16S, ksize=7)
             laplaceF = np.fft.fft2(filteredLaplacian)
             laplaceFshift = np.fft.fftshift(laplaceF)
-            laplace_magnitude_spectrum = 20*np.log(np.abs(laplaceFshift))
+            laplace_magnitude_spectrum = 20 * np.log(np.abs(laplaceFshift))
             self.axes_Filt_Spat.imshow(filteredLaplacian, cmap='gray')
             self.axes_Filt_Freq.imshow(laplace_magnitude_spectrum.astype('uint8'), cmap='gray')
 
         elif self.comboBox_filters.currentText() == 'median':
-            median = cv2.medianBlur(self.img,11)
+            median = cv2.medianBlur(self.img, 11)
             medianF = np.fft.fft2(median)
             medianFshift = np.fft.fftshift(medianF)
-            median_magnitude_spectrum = 20*np.log(np.abs(medianFshift)) 
+            median_magnitude_spectrum = 20 * np.log(np.abs(medianFshift))
             self.axes_Filt_Spat.imshow(median, cmap='gray')
             self.axes_Filt_Freq.imshow(median_magnitude_spectrum.astype('uint8'), cmap='gray')
-          
+
         ##Write filters code here## 
-
-
 
         #############
 
-
-        self.canvas_Filt_Freq.draw()##apply changes
-        self.canvas_Filt_Spat.draw()##apply changes
-    
- 
-        
+        self.canvas_Filt_Freq.draw()  ##apply changes
+        self.canvas_Filt_Spat.draw()  ##apply changes
 
 
-
-    
 
 class application(QtWidgets.QMainWindow):
     def __init__(self):
@@ -156,14 +170,6 @@ class application(QtWidgets.QMainWindow):
         self.gui=GUI()
         self.gui.setup(self)
     
-
-
-
-
-    
-
-    
-        
 
 
 
@@ -178,5 +184,3 @@ def window():
 # main code
 if __name__ == "__main__":
     window()
-    
-    

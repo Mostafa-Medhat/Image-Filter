@@ -26,6 +26,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 from skimage.color import rgb2gray
+import qdarkstyle
 
 
 class GUI (Ui_MainWindow):
@@ -44,17 +45,20 @@ class GUI (Ui_MainWindow):
         self.figure_Orig_Spat = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Spat = self.figure_Orig_Spat.add_subplot()
         self.canvas_Orig_Spat = FigureCanvas(self.figure_Orig_Spat)
+        self.canvas_Orig_Spat.figure.set_facecolor("#19232D")
         self.gridLayout_2.addWidget(self.canvas_Orig_Spat, 1, 1, 1, 1)
 
         self.figure_Orig_Freq = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Freq = self.figure_Orig_Freq.add_subplot()
         self.canvas_Orig_Freq = FigureCanvas(self.figure_Orig_Freq)
+        self.canvas_Orig_Freq.figure.set_facecolor("#19232D")
         self.gridLayout_2.addWidget(self.canvas_Orig_Freq, 1, 2, 1, 1)
 
 
         self.figure_Filt_Spat = Figure(figsize=(3, 3), dpi=100)
         self.axes_Filt_Spat = self.figure_Filt_Spat.add_subplot()
         self.canvas_Filt_Spat = FigureCanvas(self.figure_Filt_Spat)
+        self.canvas_Filt_Spat.figure.set_facecolor("#19232D")
         self.gridLayout_2.addWidget(self.canvas_Filt_Spat, 2, 1, 1, 1)
 
 
@@ -62,26 +66,40 @@ class GUI (Ui_MainWindow):
         self.figure_Filt_Freq = Figure(figsize=(3, 3), dpi=100)
         self.axes_Filt_Freq = self.figure_Filt_Freq.add_subplot()
         self.canvas_Filt_Freq = FigureCanvas(self.figure_Filt_Freq)
+        self.canvas_Filt_Freq.figure.set_facecolor("#19232D")
         self.gridLayout_2.addWidget(self.canvas_Filt_Freq, 2, 2, 1, 1)
 
         self.figure_Orig_image = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_image = self.figure_Orig_image.add_subplot()
         self.canvas_Orig_image = FigureCanvas(self.figure_Orig_image)
+        self.canvas_Orig_image.figure.set_facecolor("#19232D")
         self.gridLayout_4.addWidget(self.canvas_Orig_image, 1, 0, 1, 1)
 
         self.figure_Orig_Hist = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Hist = self.figure_Orig_Hist.add_subplot()
         self.canvas_Orig_Hist = FigureCanvas(self.figure_Orig_Hist)
+        self.canvas_Orig_Hist.figure.set_facecolor("#19232D")
+        self.axes_Orig_Hist.xaxis.label.set_color('white')
+        self.axes_Orig_Hist.yaxis.label.set_color('white')
+        self.axes_Orig_Hist.axes.tick_params(axis="x", colors="white")
+        self.axes_Orig_Hist.axes.tick_params(axis="y", colors="white")
         self.gridLayout_4.addWidget(self.canvas_Orig_Hist,  2, 0, 1, 1)
 
         self.figure_Filt_image = Figure(figsize=(3, 3), dpi=100)
         self.axes_Filt_image = self.figure_Filt_image.add_subplot()
         self.canvas_Filt_image = FigureCanvas(self.figure_Filt_image)
+        self.canvas_Filt_image.figure.set_facecolor("#19232D")
+
         self.gridLayout_4.addWidget(self.canvas_Filt_image, 1, 1, 1, 1)
 
         self.figure_Filt_Hist = Figure(figsize=(3, 3), dpi=100)
         self.axes_Filt_Hist = self.figure_Filt_Hist.add_subplot()
         self.canvas_Filt_Hist = FigureCanvas(self.figure_Filt_Hist)
+        self.axes_Filt_Hist.xaxis.label.set_color('white')
+        self.axes_Filt_Hist.yaxis.label.set_color('white')
+        self.canvas_Filt_Hist.figure.set_facecolor("#19232D")
+        self.axes_Filt_Hist.axes.tick_params(axis="x", colors="white")
+        self.axes_Filt_Hist.axes.tick_params(axis="y", colors="white")
         self.gridLayout_4.addWidget(self.canvas_Filt_Hist, 2, 1, 1, 1)
 
 
@@ -107,6 +125,7 @@ class GUI (Ui_MainWindow):
         self.img = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2GRAY)
         self.img_rgb=cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2RGB)
         self.img= cv2.resize(self.img,(520,265))
+        self.img_rgb=cv2.resize(self.img_rgb,(520,265))
         dft = cv2.dft(np.float32(self.img),flags = cv2.DFT_COMPLEX_OUTPUT)##calculate dft for frequency domain
         dft_shift = np.fft.fftshift(dft)
         magnitude_spectrum = 20*np.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1]))
@@ -438,12 +457,6 @@ class GUI (Ui_MainWindow):
                 self.axes_Filt_Freq.set_yticks([])
 
 
-          
-
-
-
-
-
         self.canvas_Filt_Freq.draw()##apply changes
         self.canvas_Filt_Spat.draw()##apply changes
         self.canvas_Orig_Spat.draw()##apply changes
@@ -461,6 +474,7 @@ class application(QtWidgets.QMainWindow):
 
 def window():
     app = QApplication(sys.argv)
+    app.setStyleSheet(qdarkstyle.load_stylesheet())
     win = application()
     win.show()
     sys.exit(app.exec_())

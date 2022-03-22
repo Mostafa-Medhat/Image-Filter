@@ -16,6 +16,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1209, 738)
+        """
         MainWindow.setStyleSheet("/*\n"
 "ElegantDark Style Sheet for QT Applications\n"
 "Author: Jaime A. Quiroga P.\n"
@@ -212,7 +213,9 @@ class Ui_MainWindow(object):
 "QStatusBar {\n"
 "    color:rgb(240,240,240);\n"
 "}")
+        """
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        """
         self.centralwidget.setStyleSheet("/*\n"
 "Aqua Style Sheet for QT Applications\n"
 "Author: Jaime A. Quiroga P.\n"
@@ -772,10 +775,12 @@ class Ui_MainWindow(object):
 "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
 "   background: none;\n"
 "}")
+        """
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        """
         self.tabWidget.setStyleSheet("/*\n"
 "Aqua Style Sheet for QT Applications\n"
 "Author: Jaime A. Quiroga P.\n"
@@ -1335,8 +1340,10 @@ class Ui_MainWindow(object):
 "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
 "   background: none;\n"
 "}")
+        """
         self.tabWidget.setObjectName("tabWidget")
         self.tab_image_filtering = QtWidgets.QWidget()
+        """
         self.tab_image_filtering.setStyleSheet("/*\n"
 "Aqua Style Sheet for QT Applications\n"
 "Author: Jaime A. Quiroga P.\n"
@@ -1896,6 +1903,7 @@ class Ui_MainWindow(object):
 "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
 "   background: none;\n"
 "}")
+        """
         self.tab_image_filtering.setObjectName("tab_image_filtering")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_image_filtering)
         self.gridLayout_3.setObjectName("gridLayout_3")

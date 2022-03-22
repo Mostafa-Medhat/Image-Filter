@@ -142,7 +142,7 @@ class GUI (Ui_MainWindow):
         self.axes_Orig_Hist.plot(cdf_normalized,color='r')
         self.axes_Orig_Hist.legend(('cdf', 'histogram'), loc='upper right')
         self.axes_Orig_Hist.set_xlabel("Gray Level")
-        self.axes_Orig_Hist.set_ylabel("Number of pixels")
+        self.axes_Orig_Hist.set_ylabel("Number of Pixels")
 
 
         equalize = (cdf - cdf.min()) * 255 / ((self.img.shape[0] * self.img.shape[1]) - cdf.min())
@@ -158,7 +158,7 @@ class GUI (Ui_MainWindow):
         self.axes_Filt_Hist.plot(cdf_normalized_equalized,color='r')
         self.axes_Filt_Hist.legend(('cdf', 'histogram'), loc='upper right')
         self.axes_Filt_Hist.set_xlabel("Gray Level")
-        self.axes_Filt_Hist.set_ylabel("Number of pixels")
+        self.axes_Filt_Hist.set_ylabel("Number of Pixels")
 
         ##############
 

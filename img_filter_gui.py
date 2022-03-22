@@ -2065,7 +2065,7 @@ class Ui_MainWindow(object):
         self.comboBox_filters.setCurrentText(_translate("MainWindow", "Choose a Filter"))
         self.comboBox_color_filters.setCurrentText(_translate("MainWindow", "Choose Image Type"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_image_filtering), _translate("MainWindow", "Image Filtering"))
-        self.label_Hist_Title_Filt.setText(_translate("MainWindow", "Filtered"))
+        self.label_Hist_Title_Filt.setText(_translate("MainWindow", "Equalized"))
         self.label_Hist_Title_Orig.setText(_translate("MainWindow", "Original"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_histogram), _translate("MainWindow", "Histogram Equalization"))
         self.menuOpen.setTitle(_translate("MainWindow", "File"))

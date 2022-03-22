@@ -98,10 +98,30 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+
+        self.open_1 = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setWeight(75)
+        self.open_1.setFont(font)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("Icons/open3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.open_1.setIcon(icon2)
+        self.open_1.setObjectName("open_1")
+        self.horizontalLayout.addWidget(self.open_1)
+
+
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
+
         self.comboBox_filters = QtWidgets.QComboBox(self.tab_image_filtering)
         self.comboBox_filters.setEditable(True)
         self.comboBox_filters.setObjectName("comboBox_filters")
         self.horizontalLayout.addWidget(self.comboBox_filters)
+
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem2)
+
         self.comboBox_color_filters = QtWidgets.QComboBox(self.tab_image_filtering)
         self.comboBox_color_filters.setEditable(True)
         self.comboBox_color_filters.setObjectName("comboBox_color_filters")
@@ -111,7 +131,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setStretch(0, 5)
         self.horizontalLayout.setStretch(1, 2)
         self.horizontalLayout.setStretch(2, 2)
-        self.horizontalLayout.setStretch(3, 5)
+        self.horizontalLayout.setStretch(3, 3)
+        self.horizontalLayout.setStretch(4, 2)
+        self.horizontalLayout.setStretch(5, 3)
+        self.horizontalLayout.setStretch(6, 5)
+
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout.setStretch(0, 1)
         self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
@@ -192,6 +218,7 @@ class Ui_MainWindow(object):
         self.label_Title_Freq.setText(_translate("MainWindow", "Frequency Domain"))
         self.label_Title_Orig.setText(_translate("MainWindow", "Original"))
         self.label_Title_Fil.setText(_translate("MainWindow", "Filtered"))
+        self.open_1.setText(_translate("MainWindow", "  OPEN"))
         self.comboBox_filters.setCurrentText(_translate("MainWindow", "Choose a Filter"))
         self.comboBox_color_filters.setCurrentText(_translate("MainWindow", "Choose Image Type"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_image_filtering), _translate("MainWindow", "Image Filtering"))

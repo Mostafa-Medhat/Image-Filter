@@ -32,15 +32,15 @@ import qdarkstyle
 class GUI (Ui_MainWindow):
     def setup(self,MainWindow):
         super().setupUi(MainWindow)
-        self.comboBox_filters.addItem("No filter")
-        self.comboBox_filters.addItem("high pass spatial")
-        self.comboBox_filters.addItem("low pass spatial")
-        self.comboBox_filters.addItem("high pass freq")
-        self.comboBox_filters.addItem("low pass freq")
-        self.comboBox_filters.addItem("median")
-        self.comboBox_filters.addItem("laplace")
-        self.comboBox_color_filters.addItem("Gray scale mode")
-        self.comboBox_color_filters.addItem("RGB scale mode")
+        self.comboBox_filters.addItem("No Filter")
+        self.comboBox_filters.addItem("High Pass Spatial")
+        self.comboBox_filters.addItem("Low Pass Spatial")
+        self.comboBox_filters.addItem("High Pass Freq")
+        self.comboBox_filters.addItem("Low Pass Freq")
+        self.comboBox_filters.addItem("Median")
+        self.comboBox_filters.addItem("Laplace")
+        self.comboBox_color_filters.addItem("Gray Scale Mode")
+        self.comboBox_color_filters.addItem("RGB Scale Mode")
 
         self.figure_Orig_Spat = Figure(figsize=(3, 3), dpi=100)
         self.axes_Orig_Spat = self.figure_Orig_Spat.add_subplot()
@@ -116,6 +116,7 @@ class GUI (Ui_MainWindow):
 
         
         self.actionImage.triggered.connect(lambda : self.browse())
+        self.open_1.clicked.connect(lambda: self.browse())
         self.comboBox_filters.currentIndexChanged.connect(self.filtering)
         self.comboBox_color_filters.currentIndexChanged.connect(self.filtering)
         self.img=0
@@ -390,37 +391,37 @@ class GUI (Ui_MainWindow):
 
 
     def filtering(self): #this function is called when the combobox is changed
-        if self.comboBox_color_filters.currentText() == 'Gray scale mode' :
+        if self.comboBox_color_filters.currentText() == 'Gray Scale Mode' :
             self.axes_Orig_Spat.imshow(self.img, cmap = 'gray')
 
 
-            if self.comboBox_filters.currentText() == 'laplace':
+            if self.comboBox_filters.currentText() == 'Laplace':
                
                 filteredLaplacian,laplace_magnitude_spectrum=self.laplace(self.img)
                 self.axes_Filt_Spat.imshow(filteredLaplacian, cmap='gray')
                 self.axes_Filt_Freq.imshow(laplace_magnitude_spectrum.astype('uint8'), cmap='gray')
         
-            elif self.comboBox_filters.currentText() == 'median':
+            elif self.comboBox_filters.currentText() == 'Median':
                 median,median_magnitude_spectrum=self.median(self.img) 
                 self.axes_Filt_Spat.imshow(median, cmap='gray')
                 self.axes_Filt_Freq.imshow(median_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'low pass spatial':
+            elif self.comboBox_filters.currentText() == 'Low Pass Spatial':
                 filtered_img,low_pass_magnitude_spectrum= self.low_pass_spatial_filter(self.img)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(low_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'high pass spatial':
+            elif self.comboBox_filters.currentText() == 'High Pass Spatial':
                 filtered_img,high_pass_magnitude_spectrum= self.high_pass_spatial_filter(self.img)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'low pass freq':
+            elif self.comboBox_filters.currentText() == 'Low Pass Freq':
                 filtered_img,_,low_pass_magnitude_spectrum= self.low_pass_freq_filter(self.img)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(low_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'high pass freq':
+            elif self.comboBox_filters.currentText() == 'High Pass Freq':
                 filtered_img,_,high_pass_magnitude_spectrum= self.high_pass_freq_filter(self.img)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'No filter':
+            elif self.comboBox_filters.currentText() == 'No Filter':
                 self.axes_Filt_Spat.clear()
                 self.axes_Filt_Freq.clear()
                 self.axes_Filt_Spat.set_xticks([])
@@ -429,34 +430,34 @@ class GUI (Ui_MainWindow):
                 self.axes_Filt_Freq.set_yticks([])
 
 
-        elif self.comboBox_color_filters.currentText() == 'RGB scale mode':
+        elif self.comboBox_color_filters.currentText() == 'RGB Scale Mode':
             
             self.axes_Orig_Spat.imshow(self.img_rgb)
-            if self.comboBox_filters.currentText() == 'laplace':
-                filteredLaplacian,laplace_magnitude_spectrum=self.laplace(self.img_rgb)
+            if self.comboBox_filters.currentText() == 'Laplace':
+                filteredLaplacian,laplace_magnitude_spectrum=self.laplace(self.img)
                 self.axes_Filt_Spat.imshow(filteredLaplacian, cmap='gray')
                 self.axes_Filt_Freq.imshow(laplace_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'median':
+            elif self.comboBox_filters.currentText() == 'Median':
                 median,median_magnitude_spectrum=self.median(self.img_rgb) 
                 self.axes_Filt_Spat.imshow(median, cmap='gray')
                 self.axes_Filt_Freq.imshow(median_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'low pass spatial':
+            elif self.comboBox_filters.currentText() == 'Low Pass Spatial':
                 filtered_img,low_pass_magnitude_spectrum= self.low_pass_spatial_filter(self.img_rgb)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(low_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'high pass spatial':
+            elif self.comboBox_filters.currentText() == 'High Pass Spatial':
                 filtered_img,high_pass_magnitude_spectrum= self.high_pass_spatial_filter(self.img_rgb)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'low pass freq':
+            elif self.comboBox_filters.currentText() == 'Low Pass Freq':
                 filtered_img,_,low_pass_magnitude_spectrum= self.low_pass_freq_filter(self.img_rgb)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(low_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'high pass freq':
+            elif self.comboBox_filters.currentText() == 'High Pass Freq':
                 filtered_img,_,high_pass_magnitude_spectrum= self.high_pass_freq_filter(self.img_rgb)
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
-            elif self.comboBox_filters.currentText() == 'No filter':
+            elif self.comboBox_filters.currentText() == 'No Filter':
                 self.axes_Filt_Spat.clear()
                 self.axes_Filt_Freq.clear()
                 self.axes_Filt_Spat.set_xticks([])

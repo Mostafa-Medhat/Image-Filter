@@ -16,6 +16,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1209, 738)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("Icons/Image_processing.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
 
         ########
         # I DID ITTTTTT !!!!!
@@ -184,7 +187,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Image Filter Illustrator"))
         self.label_Title_Spat.setText(_translate("MainWindow", "Spatial Domain"))
         self.label_Title_Freq.setText(_translate("MainWindow", "Frequency Domain"))
         self.label_Title_Orig.setText(_translate("MainWindow", "Original"))

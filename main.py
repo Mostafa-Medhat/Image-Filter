@@ -83,6 +83,8 @@ class GUI (Ui_MainWindow):
         self.axes_Orig_Hist.yaxis.label.set_color('white')
         self.axes_Orig_Hist.axes.tick_params(axis="x", colors="white")
         self.axes_Orig_Hist.axes.tick_params(axis="y", colors="white")
+        self.axes_Orig_Hist.axes.set_title("Histogram")
+        self.axes_Orig_Hist.axes.title.set_color('white')
         self.gridLayout_4.addWidget(self.canvas_Orig_Hist,  2, 0, 1, 1)
 
         self.figure_Filt_image = Figure(figsize=(3, 3), dpi=100)
@@ -100,6 +102,8 @@ class GUI (Ui_MainWindow):
         self.canvas_Filt_Hist.figure.set_facecolor("#19232D")
         self.axes_Filt_Hist.axes.tick_params(axis="x", colors="white")
         self.axes_Filt_Hist.axes.tick_params(axis="y", colors="white")
+        self.axes_Filt_Hist.axes.set_title("Histogram")
+        self.axes_Filt_Hist.axes.title.set_color('white')
         self.gridLayout_4.addWidget(self.canvas_Filt_Hist, 2, 1, 1, 1)
 
 
@@ -143,6 +147,8 @@ class GUI (Ui_MainWindow):
         self.axes_Orig_Hist.legend(('cdf', 'histogram'), loc='upper right')
         self.axes_Orig_Hist.set_xlabel("Gray Level")
         self.axes_Orig_Hist.set_ylabel("Number of Pixels")
+        self.axes_Orig_Hist.axes.set_title("Histogram")
+        self.axes_Orig_Hist.axes.title.set_color('white')
 
 
         equalize = (cdf - cdf.min()) * 255 / ((self.img.shape[0] * self.img.shape[1]) - cdf.min())
@@ -159,6 +165,8 @@ class GUI (Ui_MainWindow):
         self.axes_Filt_Hist.legend(('cdf', 'histogram'), loc='upper right')
         self.axes_Filt_Hist.set_xlabel("Gray Level")
         self.axes_Filt_Hist.set_ylabel("Number of Pixels")
+        self.axes_Filt_Hist.axes.set_title("Histogram")
+        self.axes_Filt_Hist.axes.title.set_color('white')
 
         ##############
 

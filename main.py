@@ -133,10 +133,18 @@ class GUI (Ui_MainWindow):
         self.img_rgb=cv2.resize(self.img_rgb,(520,265))
         dft = cv2.dft(np.float32(self.img),flags = cv2.DFT_COMPLEX_OUTPUT)##calculate dft for frequency domain
         dft_shift = np.fft.fftshift(dft)
+        global magnitude_spectrum
         magnitude_spectrum = 20*np.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1]))
         self.axes_Orig_Freq.imshow(magnitude_spectrum, cmap = 'gray')## frequency domian
         self.axes_Orig_Spat.imshow(self.img, cmap = 'gray') ##original image
+
+        self.axes_Filt_Spat.imshow(self.img, cmap='gray')  ##original image
+        self.axes_Filt_Freq.imshow(magnitude_spectrum, cmap='gray')  ## frequency domian
+
         self.axes_Orig_image.imshow(self.img, cmap = 'gray') ##original image in the histogram tab
+
+
+        ################ HISTOGRAM EQUALIZATION ################################
 
         hist_gray, bins_gray = np.histogram(self.img.flatten(), 256, [0, 255])
         cdf = hist_gray.cumsum()
@@ -145,7 +153,7 @@ class GUI (Ui_MainWindow):
         self.axes_Orig_Hist.clear()
         self.axes_Orig_Hist.hist(self.img.flatten(),bins=bins_gray)
         self.axes_Orig_Hist.plot(cdf_normalized,color='r')
-        self.axes_Orig_Hist.legend(('cdf', 'histogram'), loc='upper right')
+        self.axes_Orig_Hist.legend(('CDF', 'Histogram'), loc='upper right')
         self.axes_Orig_Hist.set_xlabel("Gray Level")
         self.axes_Orig_Hist.set_ylabel("Number of Pixels")
         self.axes_Orig_Hist.axes.set_title("Histogram")
@@ -163,7 +171,7 @@ class GUI (Ui_MainWindow):
         self.axes_Filt_Hist.clear()
         self.axes_Filt_Hist.hist(equalizedImage.flatten(),bins=bins_gray)
         self.axes_Filt_Hist.plot(cdf_normalized_equalized,color='r')
-        self.axes_Filt_Hist.legend(('cdf', 'histogram'), loc='upper right')
+        self.axes_Filt_Hist.legend(('CDF', 'Histogram'), loc='upper right')
         self.axes_Filt_Hist.set_xlabel("Gray Level")
         self.axes_Filt_Hist.set_ylabel("Number of Pixels")
         self.axes_Filt_Hist.axes.set_title("Histogram")
@@ -422,12 +430,10 @@ class GUI (Ui_MainWindow):
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
             elif self.comboBox_filters.currentText() == 'No Filter':
-                self.axes_Filt_Spat.clear()
-                self.axes_Filt_Freq.clear()
-                self.axes_Filt_Spat.set_xticks([])
-                self.axes_Filt_Spat.set_yticks([])
-                self.axes_Filt_Freq.set_xticks([])
-                self.axes_Filt_Freq.set_yticks([])
+                self.axes_Filt_Spat.imshow(self.img, cmap='gray')
+                self.axes_Filt_Freq.imshow(magnitude_spectrum, cmap='gray')  ## frequency domian
+
+
 
 
         elif self.comboBox_color_filters.currentText() == 'RGB Scale Mode':
@@ -458,18 +464,14 @@ class GUI (Ui_MainWindow):
                 self.axes_Filt_Spat.imshow(filtered_img, cmap='gray')
                 self.axes_Filt_Freq.imshow(high_pass_magnitude_spectrum.astype('uint8'), cmap='gray')
             elif self.comboBox_filters.currentText() == 'No Filter':
-                self.axes_Filt_Spat.clear()
-                self.axes_Filt_Freq.clear()
-                self.axes_Filt_Spat.set_xticks([])
-                self.axes_Filt_Spat.set_yticks([])
-                self.axes_Filt_Freq.set_xticks([])
-                self.axes_Filt_Freq.set_yticks([])
+                self.axes_Filt_Spat.imshow(self.img_rgb)
+                self.axes_Filt_Freq.imshow(magnitude_spectrum, cmap='gray')  ## frequency domian
 
 
         self.canvas_Filt_Freq.draw()##apply changes
         self.canvas_Filt_Spat.draw()##apply changes
         self.canvas_Orig_Spat.draw()##apply changes
-    
+
 
 
 class application(QtWidgets.QMainWindow):

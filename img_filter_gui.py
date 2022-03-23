@@ -21,8 +21,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowIcon(icon)
 
         ########
-        # I DID ITTTTTT !!!!!
-        # LOAD qss Style sheet file in onnnnlyyyy one line .. First Comment on qdarkstyle line in main.py and Here it is:
+        # LOAD qss Style sheet file in only one line .. First Comment on qdarkstyle line in main.py and Here it is:
         # MainWindow.setStyleSheet(open('orange_dark_style.qss.txt').read())
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -168,13 +167,12 @@ class Ui_MainWindow(object):
         self.label_Hist_Title_Orig.setAlignment(QtCore.Qt.AlignCenter)
         self.label_Hist_Title_Orig.setObjectName("label_Hist_Title_Orig")
         self.gridLayout_4.addWidget(self.label_Hist_Title_Orig, 0, 0, 1, 1)
+
         self.widget_Orig_Hist = QtWidgets.QWidget(self.tab_histogram)
-        # self.graphicsView_Filt = PlotWidget(self.tab_histogram)
-        # self.graphicsView_Filt.setObjectName("graphicsView_Filt")
-        # self.gridLayout_4.addWidget(self.graphicsView_Filt, 2, 1, 1, 1)
         self.widget_Orig_Hist = QtWidgets.QWidget(self.tab_histogram)
         self.widget_Orig_Hist.setObjectName("widget_Orig_Hist")
         self.gridLayout_4.addWidget(self.widget_Orig_Hist, 1, 0, 1, 1)
+
         self.widget_Filt_Hist = QtWidgets.QWidget(self.tab_histogram)
         self.widget_Filt_Hist.setObjectName("widget_Filt_Hist")
         self.gridLayout_4.addWidget(self.widget_Filt_Hist, 2, 1, 1, 1)

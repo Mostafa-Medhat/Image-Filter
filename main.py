@@ -127,10 +127,9 @@ class GUI (Ui_MainWindow):
         filename = QFileDialog.getOpenFileName()##reading file
         imagePath = filename[0] ##reading file
         self.img_bgr = cv2.imread(imagePath)##reading file
+        self.img_bgr= cv2.resize(self.img_bgr,(520,265))
         self.img = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2GRAY)
         self.img_rgb=cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2RGB)
-        self.img= cv2.resize(self.img,(520,265))
-        self.img_rgb=cv2.resize(self.img_rgb,(520,265))
         dft = cv2.dft(np.float32(self.img),flags = cv2.DFT_COMPLEX_OUTPUT)##calculate dft for frequency domain
         dft_shift = np.fft.fftshift(dft)
         global magnitude_spectrum

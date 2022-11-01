@@ -1,31 +1,12 @@
-from img_filter_gui import Ui_MainWindow
 import sys
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-from matplotlib.figure import Figure
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QTableWidgetItem
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
-from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import numpy as np
-from PIL import Image as im
-from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QFileDialog, QLabel, QTextEdit
-import sys
-from PyQt5.QtGui import QPixmap
 
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
-from skimage.color import rgb2gray
 import qdarkstyle
+from PyQt5 import QtWidgets, uic
+from PyQt5.QtWidgets import QFileDialog
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 
 # class GUI (Ui_MainWindow):
